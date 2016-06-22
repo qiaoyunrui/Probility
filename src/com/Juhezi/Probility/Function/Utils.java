@@ -41,31 +41,32 @@ public class Utils {
 
     /**
      * 求概率线性表
+     *
      * @param proMatrix
      * @param priList
      * @return
      */
-    public static List<Probility> getProbilityList(Matrix proMatrix, int source,List<Probility> priList) {
+    public static List<Probility> getProbilityList(Matrix proMatrix, int source, List<Probility> priList) {
         List<Probility> result = new ArrayList<>();
-        if(priList == null) {   //第一次
-            for(int i = 0;i < proMatrix.getRow();i++) {
-                result.add(new Probility(source,i,(double)proMatrix.get(i,source).getData()));
+        if (priList == null) {   //第一次
+            for (int i = 0; i < proMatrix.getRow(); i++) {
+                result.add(new Probility(source, i, (double) proMatrix.get(i, source).getData()));
             }
             return result;
         }
         Probility temp;
-        for(int i = 0;i < priList.size();i++) { //对线性表进行循环
-            if(priList.get(i).getProbility() == 0.0) {
+        for (int i = 0; i < priList.size(); i++) { //对线性表进行循环
+            if (priList.get(i).getProbility() == 0.0) {
                 continue;
             }
-            for(int j =0;j < proMatrix.getRow();j++) {
+            for (int j = 0; j < proMatrix.getRow(); j++) {
                 int middle = priList.get(i).getDestination();   //中间站
-                if((double)proMatrix.get(middle,j).getData() != 0.0) {
+                if ((double) proMatrix.get(middle, j).getData() != 0.0) {
                     //j - 目的地
                     //priList.get(i).getProbility() 源站到中间站的概率
                     //(double)proMatrix.get(middle,j).getData()     中间站到目的站的概率
-                    temp = new Probility(source,j,priList.get(i).getProbility() *
-                            (double)proMatrix.get(j,middle).getData());
+                    temp = new Probility(source, j, priList.get(i).getProbility() *
+                            (double) proMatrix.get(j, middle).getData());
                     /*System.out.println(priList.get(i).getProbility() +
                             " * " +
                             (double)proMatrix.get(j,middle).getData() +
@@ -81,13 +82,29 @@ public class Utils {
     }
 
 
-    public static List<Probility> getProbilityAfterDays(Matrix proMatrixm,int source,int day) {
+    public static List<Probility> getProbilityAfterDays(Matrix proMatrixm, int source, int day) {
         List<Probility> list = null;
-        for(int i = 1;i <= day;i++) {
-            list = getProbilityList(proMatrixm,source,list);
+        for (int i = 1; i <= day; i++) {
+            list = getProbilityList(proMatrixm, source, list);
         }
         return list;
 
+    }
+
+    /**
+     * 动态规划处理
+     * @return
+     */
+    public static Matrix handleByMatrix() {
+        return null;
+    }
+
+    /**
+     * 蛮力法处理
+     * @return
+     */
+    public static List<Probility> handleByList() {
+        return null;
     }
 
 }
