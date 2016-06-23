@@ -27,6 +27,7 @@ public class MainView extends JFrame {
     private static final String DATA_PATH = "/home/qiaoyunrui/probility_data/data.txt";
     private static final String RED_ICON_PATH = "./res/2-0btn_13.png";
     private static final String TITLE = "寻找逃狱的汉尼拔博士";
+    private static final String ICON_PATH = "./res/icon_old_man.jpg";
 
     private java.util.List<Double> list = new ArrayList<>();
     private Font controlFont;
@@ -44,6 +45,8 @@ public class MainView extends JFrame {
     private BoxLayout mBoxLayout;
     private BorderLayout mBorderLayout;
     private JuCanvas canvas;
+    private JScrollPane scroll;
+    private ImageIcon imageIcon = new ImageIcon(ICON_PATH);
 
     private JTextArea mJTextArea;   //输出面板
     private Icon iconRed;   //红色图标
@@ -84,6 +87,7 @@ public class MainView extends JFrame {
         chooseBtn = new JuButton(new Color(233, 22, 99), new Color(194, 24, 88));
         dataPathTF = new JTextField(DATA_PATH);
         mJTextArea = new JTextArea("Hello");
+        scroll = new JScrollPane(mJTextArea);
         dataPathJL = new JLabel("Path：");
         controlPanel = new JPanel();
         canvasPanel = new JuCanvas();
@@ -118,19 +122,25 @@ public class MainView extends JFrame {
     }
 
     private void initCanvasPanel() {
+        canvasPanel.setBackground(new Color(97, 194, 238));
         canvasPanel.setBorder(mBorder);
         canvasPanel.setFont(canvasFont);
     }
 
     private void initConsolePanel() {
         consolePanel.setSize(800, 100);
+        scroll.setHorizontalScrollBarPolicy(
+                JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scroll.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        mJTextArea.setLineWrap(true);
         mJTextArea.setAutoscrolls(true);
         mJTextArea.setEditable(false);
         mJTextArea.setFont(consoleFont);
         mJTextArea.setSize(consolePanel.getWidth(), consolePanel.getHeight());
         mJTextArea.setPreferredSize(new Dimension(mJTextArea.getWidth(), mJTextArea.getHeight()));
         mJTextArea.setBackground(Color.lightGray);
-        consolePanel.add(mJTextArea);
+        consolePanel.add(scroll);
         consolePanel.setBorder(mBorder);
     }
 
@@ -142,6 +152,7 @@ public class MainView extends JFrame {
         setBounds(100, 100, 900, 900);
         setVisible(true);
         setTitle(TITLE);
+        setIconImage(imageIcon.getImage());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
